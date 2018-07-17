@@ -70,7 +70,8 @@ public class Publisher {
             // declare a queue
             channel.queueDeclare(queueName, false, false, false, null);
             while (true) {
-                channel.basicPublish("", queueName, null, message);
+                for (int i = 0; i < 5; i++) channel.basicPublish("", queueName, null, message);
+                Thread.sleep(30000);
             }
 //            System.out.println(" [x] Sent '" + message + "'");
         } catch (Exception e) {
@@ -97,8 +98,7 @@ public class Publisher {
 
     public static void main(String[] args) {
         // load config yaml
-        Map<String, Map<String, ?>> config = load("/Users/pradeep.nair/repos/appdynamics/" +
-                "extensions/publisher/src/main/resources/conf/config.yml");
+        Map<String, Map<String, ?>> config = load("./config.yml");
         // get postgres connection properties
         Map<String, ?> psqlProps = config.get("postgres_config");
         String host = (String) psqlProps.get("host");
