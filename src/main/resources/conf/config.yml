@@ -1,0 +1,11 @@
+---
+postgres_config:
+  host: localhost
+  port: 5432
+  database: test
+  user: pradeep.nair
+  password: ''
+rabbit_config:
+  host: localhost
+  queueName: task_queue
+...
